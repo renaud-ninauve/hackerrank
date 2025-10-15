@@ -1,5 +1,6 @@
 package fr.ninauve.renaud.hackerrank.formingmagicsquare;
 
+import fr.ninauve.renaud.hackerrank.formingmagicsquare.FormingMagicSquare.RotationTransformation;
 import fr.ninauve.renaud.hackerrank.formingmagicsquare.FormingMagicSquare.TopLeftMirorTransformation;
 import fr.ninauve.renaud.hackerrank.formingmagicsquare.FormingMagicSquare.TopRightMirorTransformation;
 import fr.ninauve.renaud.hackerrank.formingmagicsquare.FormingMagicSquare.VerticalMirorTransformation;
@@ -125,5 +126,50 @@ class FormingMagicSquareStartingWithTest {
     assertThat(actual.get(0)).containsExactly(1, 4, 7);
     assertThat(actual.get(1)).containsExactly(2, 5, 8);
     assertThat(actual.get(2)).containsExactly(3, 6, 9);
+  }
+
+  @Test
+  void rotate_90() {
+    List<List<Integer>> matrix = List.of(
+        List.of(1, 2, 3),
+        List.of(4, 5, 6),
+        List.of(7, 8, 9)
+    );
+
+    List<List<Integer>> actual = FormingMagicSquare.transform(matrix, RotationTransformation.rotation90());
+
+    assertThat(actual.get(0)).containsExactly(7, 4, 1);
+    assertThat(actual.get(1)).containsExactly(8, 5, 2);
+    assertThat(actual.get(2)).containsExactly(9, 6, 3);
+  }
+
+  @Test
+  void rotate_180() {
+    List<List<Integer>> matrix = List.of(
+        List.of(1, 2, 3),
+        List.of(4, 5, 6),
+        List.of(7, 8, 9)
+    );
+
+    List<List<Integer>> actual = FormingMagicSquare.transform(matrix, RotationTransformation.rotation180());
+
+    assertThat(actual.get(0)).containsExactly(9, 8, 7);
+    assertThat(actual.get(1)).containsExactly(6, 5, 4);
+    assertThat(actual.get(2)).containsExactly(3, 2, 1);
+  }
+
+  @Test
+  void rotate_270() {
+    List<List<Integer>> matrix = List.of(
+        List.of(1, 2, 3),
+        List.of(4, 5, 6),
+        List.of(7, 8, 9)
+    );
+
+    List<List<Integer>> actual = FormingMagicSquare.transform(matrix, RotationTransformation.rotation270());
+
+    assertThat(actual.get(0)).containsExactly(3, 6, 9);
+    assertThat(actual.get(1)).containsExactly(2, 5, 8);
+    assertThat(actual.get(2)).containsExactly(1, 4, 7);
   }
 }

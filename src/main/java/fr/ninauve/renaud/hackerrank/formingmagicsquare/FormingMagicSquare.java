@@ -25,6 +25,9 @@ public class FormingMagicSquare {
     all.add(transform(magic0, new HorizontalMirorTransformation()));
     all.add(transform(magic0, new TopLeftMirorTransformation()));
     all.add(transform(magic0, new TopRightMirorTransformation()));
+    all.add(transform(magic0, RotationTransformation.rotation90()));
+    all.add(transform(magic0, RotationTransformation.rotation180()));
+    all.add(transform(magic0, RotationTransformation.rotation270()));
     return all;
   }
 
@@ -104,6 +107,53 @@ public class FormingMagicSquare {
         return new Coordinates(2, 1);
       }
       return coordinates;
+    }
+  }
+
+  public static class RotationTransformation implements Transformation {
+    private final Transformation rotation;
+
+    public RotationTransformation(Transformation rotation) {
+      this.rotation = rotation;
+    }
+
+    public static Transformation rotation90() {
+      return new RotationTransformation(new Transformation() {
+        @Override
+        public Coordinates transform(Coordinates coordinates) {
+          return new Coordinates(-coordinates.j, coordinates.i);
+        }
+      });
+    }
+
+    public static Transformation rotation180() {
+      return new RotationTransformation(new Transformation() {
+        @Override
+        public Coordinates transform(Coordinates coordinates) {
+          return new Coordinates(-coordinates.i, -coordinates.j);
+        }
+      });
+    }
+
+    public static Transformation rotation270() {
+      return new RotationTransformation(new Transformation() {
+        @Override
+        public Coordinates transform(Coordinates coordinates) {
+          return new Coordinates(coordinates.j, -coordinates.i);
+        }
+      });
+    }
+
+    @Override
+    public Coordinates transform(Coordinates coordinates) {
+      int iTranslated = coordinates.i - 1;
+      int jTranslated = coordinates.j - 1;
+
+      Coordinates rotated = rotation.transform(new Coordinates(iTranslated, jTranslated));
+
+      return new Coordinates(
+          rotated.i + 1,
+          rotated.j + 1);
     }
   }
 
