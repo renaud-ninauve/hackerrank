@@ -20,6 +20,6 @@ class FormingMagicSquareCostTest {
             List.of(4, 5, 6),
             List.of(7, 8, 9)));
 
-    assertThat(actual).isEqualTo(3);
+    assertThat(actual).isEqualTo(15);
   }
 }

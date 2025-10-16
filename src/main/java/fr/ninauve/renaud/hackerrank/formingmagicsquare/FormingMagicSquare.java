@@ -242,10 +242,12 @@ public class FormingMagicSquare {
 
   public static int cost(List<List<Integer>> a, List<List<Integer>> b) {
     int result = 0;
-    for (int j = 0; j < a.get(0).size(); j++) {
-      for (int i = 0; i < a.size(); i++) {
-        if (get(a, i, j) != get(b, i, j)) {
-          result++;
+    for (int j = 0; j < a.size(); j++) {
+      for (int i = 0; i < a.get(0).size(); i++) {
+        int valueA = get(a, i, j);
+        int valueB = get(b, i, j);
+        if (valueA != valueB) {
+          result += Math.abs(valueA - valueB);
         }
       }
     }
